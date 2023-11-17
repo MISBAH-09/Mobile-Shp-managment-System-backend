@@ -4,10 +4,10 @@ public class Samsung extends Mobile
 {
     private int SIM_capacity;
 
-    public Samsung(Company company, String Model, int RAM_GB, Dimensions dimension, int stockQuantity,
-                   Status status, Condition condition, double price, String battery_capacity,
+    public Samsung(String Model, int RAM_GB, Dimensions dimension, int stockQuantity,
+                   Condition condition, double price, String battery_capacity,
                    String OS, String camera, String colour, int SIM_capacity) {
-        super(Company.SAMSUNG, Model, RAM_GB, dimension, stockQuantity, status, condition,
+        super(Company.SAMSUNG, Model, RAM_GB, dimension, stockQuantity, Status.NOT_SALED, condition,
                 price, battery_capacity, OS, camera, colour);
         setSIM_capacity(SIM_capacity);
     }
@@ -21,10 +21,15 @@ public class Samsung extends Mobile
     }
 
     @Override
-    public String toString() {
-        return  String.format("%10d%10s%10d%10s%10d%10s%10s%10.2f%10s%10s%10s%10s%10d",getId(),getCompany(),
-                getModel(),getRAM_GB(),getDimension(),getStockQuantity(),getStatus(),getCondition(),
-                getPrice(),getBattery_capacity(),getOS(),getCamera(),getColour(),getSIM_capacity());
-
+    public String toString()
+    {
+        return  String.format("ID: %15d\nCompany: %16s\n" +
+                        "Model: %22s\nRam: %14d\nDimension: %18s\n" +
+                        "Stock Quantity: %3d\nStatus: %19s\nCondition: %10s\n" +
+                        "Price: %19.2f\nBattery Capacity: %5s\nOS: %17s\n" +
+                        "Colour: %15s\nCamera: %15s\nSIM Capacity: %5s\n"
+                ,getId(), getCompany(),getModel(),getRAM_GB(),getDimension(),
+                getStockQuantity(),getStatus(),getCondition(), getPrice(),
+                getBattery_capacity(),getOS(),getColour(),getCamera(),getSIM_capacity());
     }
 }

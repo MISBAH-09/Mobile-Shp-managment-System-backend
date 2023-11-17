@@ -8,29 +8,26 @@ public class InventoryManagement implements  Functions{
     ArrayList<Mobile> list;
     Scanner input = new Scanner(System.in);
 
-    @Override
-    public void addPhone(Object object) {
-        if (object instanceof Mobile) {
-            Mobile mobile = (Mobile) object;
-            list.add(mobile);
-            System.out.println("Mobile Phone Added Successfully");
-        } else {
-            System.out.println("Error");
-        }
+    public InventoryManagement()
+    {
+        this.list = new ArrayList<>();
     }
+
     @Override
-    public void removePhone(Object object)
+    public void addPhone(Object object)
     {
         if (object instanceof Mobile)
         {
             Mobile mobile = (Mobile) object;
-            list.remove(mobile);
-            System.out.println("Mobile Phone Removed Successfully");
-        } else
+            list.add(mobile);
+            System.out.println("Mobile Phone Added Successfully");
+        }
+        else
         {
             System.out.println("Error");
         }
     }
+
     @Override
     public void fetchPhone()
     {
@@ -43,7 +40,8 @@ public class InventoryManagement implements  Functions{
             {
                 System.out.println("Enter ID");
                 int id = input.nextInt();
-                for (Mobile mobile : list) {
+                for (Mobile mobile : list)
+                {
                     Mobile mobileVar = list.get(id - 1);
                     System.out.println(mobileVar);
                     break;
@@ -78,4 +76,9 @@ public class InventoryManagement implements  Functions{
             }
         }
     }
+
+
+
 }
+
+

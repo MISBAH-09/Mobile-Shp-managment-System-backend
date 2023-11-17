@@ -37,6 +37,7 @@ public class Dimensions {
 
     @Override
     public String toString() {
-        return String.format(getX()+"X"+getY()+"X"+getZ());
+
+        return String.format(getX()+" X "+getY()+" X "+getZ());
     }
 }

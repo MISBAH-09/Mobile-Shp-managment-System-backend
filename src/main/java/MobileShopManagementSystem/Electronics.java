@@ -84,14 +84,6 @@ public class Electronics
         this.price = price;
     }
 
-    public static int getCounter() {
-        return counter;
-    }
-
-    public static void setCounter(int counter) {
-        Electronics.counter = counter;
-    }
-
     public Status getStatus() {
         return status;
     }
@@ -133,10 +125,15 @@ public class Electronics
     }
 
     @Override
-    public String toString() {
-        return  String.format("%10d%10s%10d%10s%10d%10s%10s%10.2f%10s%10s",getId(),getCompany(),
-                getModel(),getRAM_GB(),getDimension(),getStockQuantity(),getStatus(),getCondition(),
-                getPrice(),getBattery_capacity(),getOS());
+    public String toString()
+    {
+        return  String.format("ID: %15d\nCompany: %14s\n" +
+                        "Model: %20s\nRam: %14d\nDimension: %18s\n" +
+                        "Stock Quantity: %3d\nStatus: %19s\nCondition: %10s\n" +
+                        "Price: %19.2f\nBattery Capacity: %5s\nOS: %17s\n"
+                ,getId(), getCompany(),getModel(),getRAM_GB(),getDimension(),
+                getStockQuantity(),getStatus(),getCondition(), getPrice(),
+                getBattery_capacity(),getOS());
 
     }
 }
