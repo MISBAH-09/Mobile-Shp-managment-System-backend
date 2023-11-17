@@ -1,5 +1,5 @@
 package MobileShopManagementSystem;
 
 public enum Condition {
-    NEW,USED;
+    NEW, SECOND_HAND;
 }
