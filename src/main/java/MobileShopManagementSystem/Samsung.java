@@ -1,9 +1,6 @@
 package MobileShopManagementSystem;
 
-import MobileShopManagementSystem.Company;
-import MobileShopManagementSystem.Condition;
-import MobileShopManagementSystem.Dimensions;
-import MobileShopManagementSystem.Mobile;
+import Mobile;
 
 public class Samsung extends Mobile
 {

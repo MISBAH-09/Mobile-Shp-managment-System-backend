@@ -1,7 +1,4 @@
 package MobileShopManagementSystem;
-
-import MobileShopManagementSystem.Electronics;
-
 import java.util.ArrayList;
 
 public class Main

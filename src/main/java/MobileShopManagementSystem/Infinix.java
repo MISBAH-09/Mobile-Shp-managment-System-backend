@@ -1,9 +1,4 @@
 package MobileShopManagementSystem;
-
-import MobileShopManagementSystem.Company;
-import MobileShopManagementSystem.Condition;
-import MobileShopManagementSystem.Dimensions;
-
 public class Infinix extends Mobile {
     private String Broweser;
     private String SpecialFeatures;
