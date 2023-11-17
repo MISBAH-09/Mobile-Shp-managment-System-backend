@@ -66,4 +66,16 @@ public class InventoryManagement implements  Functions{
 
         }
     }
+
+    @Override
+    public void display()
+    {
+        for(Mobile mobile:list)
+        {
+            if (mobile != null)
+            {
+                System.out.println(mobile);
+            }
+        }
+    }
 }
