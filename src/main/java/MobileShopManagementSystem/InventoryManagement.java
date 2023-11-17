@@ -3,11 +3,12 @@ package MobileShopManagementSystem;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class InventoryManagement {
+public class InventoryManagement implements  Functions{
 
     ArrayList<Mobile> list;
     Scanner input = new Scanner(System.in);
 
+    @Override
     public void addPhone(Object object) {
         if (object instanceof Mobile) {
             Mobile mobile = (Mobile) object;
@@ -17,7 +18,7 @@ public class InventoryManagement {
             System.out.println("Error");
         }
     }
-
+    @Override
     public void removePhone(Object object)
     {
         if (object instanceof Mobile)
@@ -30,6 +31,7 @@ public class InventoryManagement {
             System.out.println("Error");
         }
     }
+    @Override
     public void fetchPhone()
     {
         System.out.println("Fetch by: ");
