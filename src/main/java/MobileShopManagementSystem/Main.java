@@ -18,7 +18,7 @@ public class Main
                 Condition.NEW,34111.3,"4 hrs","IOS",
                 "black","12","67","wired",
                 "faceID/TOUCHiD");
-        inventoryManagement.addPhone(iphone);
-        inventoryManagement.display();
+       // inventoryManagement.addPhone(iphone);
+        //inventoryManagement.display();
     }
 }
