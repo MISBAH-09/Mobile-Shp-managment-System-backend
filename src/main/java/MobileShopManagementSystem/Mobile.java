@@ -11,7 +11,8 @@ public class Mobile extends Electronics
         this.colour = colour;
     }
 
-        public String getCamera() {
+        public String getCamera()
+        {
         return Camera;
     }
 
@@ -26,4 +27,11 @@ public class Mobile extends Electronics
         this.colour = colour;
     }
 
+        @Override
+        public String toString() {
+            return  String.format("%10d%10s%10d%10s%10d%10s%10s%10.2f%10s%10s%10s%10s",getId(),getCompany(),
+                    getModel(),getRAM_GB(),getDimension(),getStockQuantity(),getStatus(),getCondition(),
+                    getPrice(),getBattery_capacity(),getOS(),getCamera(),getColour());
+
+        }
     }
