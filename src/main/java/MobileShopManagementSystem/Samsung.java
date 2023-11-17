@@ -1,7 +1,5 @@
 package MobileShopManagementSystem;
 
-import Mobile;
-
 public class Samsung extends Mobile
 {
     private int SIM_capacity;
