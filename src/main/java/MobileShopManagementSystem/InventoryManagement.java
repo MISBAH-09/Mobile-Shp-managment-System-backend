@@ -66,15 +66,15 @@ public class InventoryManagement implements  Functions{
     {
         if (company.equals(Company.APPLE))
         {
-           displayModel();
+            displayModel(company);
         }
         if (company.equals(Company.INFINIX))
         {
-            displayModel();
+            displayModel(company);
         }
         if (company.equals(Company.SAMSUNG))
         {
-            displayModel();
+            displayModel(company);
         }
 
 
@@ -82,13 +82,49 @@ public class InventoryManagement implements  Functions{
 
 
     @Override
-    public void displayModel()
+    public void display()
     {
         for(Mobile mobile:list)
         {
             if (mobile != null)
             {
                 System.out.println(mobile.getModel());
+            }
+        }
+    }
+
+    public void displayModel(Company company)
+    {
+        if(company.equals(Company.APPLE))
+        {
+            for (Iphone iphone : listOfIphone)
+            {
+                if(iphone != null)
+                {
+                    System.out.println(iphone.getModel());
+                }
+            }
+        }
+
+        if(company.equals(Company.INFINIX))
+        {
+            for (Infinix infinix : listOfInfinix)
+            {
+                if(infinix != null)
+                {
+                    System.out.println(infinix.getModel());
+                }
+            }
+        }
+
+        if(company.equals(Company.SAMSUNG))
+        {
+            for (Samsung samsung : listOfSamsung)
+            {
+                if (samsung != null)
+                {
+                    System.out.println(samsung.getModel());
+                }
             }
         }
     }
