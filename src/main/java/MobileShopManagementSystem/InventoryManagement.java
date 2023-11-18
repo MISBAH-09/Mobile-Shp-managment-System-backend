@@ -7,8 +7,7 @@ public class InventoryManagement implements  Functions{
     ArrayList<Mobile> list;
     ArrayList<Mobile> lowStock;
     ArrayList<Mobile> outOfStock;
-    ArrayList<Mobile> purchasedList;
-
+    ArrayList<PurchasedMobile> purchasedList;
 
 
     public InventoryManagement()
@@ -48,7 +47,7 @@ public class InventoryManagement implements  Functions{
         }
     }
 
-
+@Override
     public void DisplayListOfMobileByCompany(Company company)
     {
         for (Mobile mobile : list)
@@ -60,7 +59,7 @@ public class InventoryManagement implements  Functions{
             }
         }
     }
-
+@Override
     public void DisplayListOfMobileByPrice(double lowerPrice, double upperPrice)
     {
         for (Mobile mobile : list)
@@ -71,7 +70,7 @@ public class InventoryManagement implements  Functions{
             }
         }
     }
-
+@Override
     public void DisplayListOfMobileByCompanyAndPrice(Company company, double lowerPrice, double upperPrice)
     {
         for (Mobile mobile : list)
@@ -113,7 +112,7 @@ public class InventoryManagement implements  Functions{
             break;
         }
     }
-
+@Override
     public void UpdateStock(String model, int stockQunatity)
     {
         model = model.toUpperCase();
@@ -131,8 +130,7 @@ public class InventoryManagement implements  Functions{
             break;
         }
     }
-
-
+  @Override
     public void purchasedMobile(String model)
     {
         model = model.toUpperCase();
@@ -152,7 +150,7 @@ public class InventoryManagement implements  Functions{
         }
     }
 
-
+@Override
     public boolean OutOfStock(Mobile mobile)
     {
         if(mobile != null && mobile.getStockQuantity() == 0)
@@ -164,7 +162,7 @@ public class InventoryManagement implements  Functions{
 
         return false;
     }
-
+@Override
     public boolean LowStock(Mobile mobile)
     {
         int stock  = mobile.getStockQuantity() / 2;
@@ -176,7 +174,7 @@ public class InventoryManagement implements  Functions{
         return false;
     }
 
-
+@Override
     public void displayOutofStockMobile()
     {
         for (Mobile mobile : list)
@@ -188,7 +186,7 @@ public class InventoryManagement implements  Functions{
         }
     }
 
-
+@Override
     public void displayLowStockMobile()
     {
         for (Mobile mobile : list)
@@ -200,7 +198,7 @@ public class InventoryManagement implements  Functions{
         }
     }
 
-
+@Override
     public void displayMonthlyFrequentlyPurchasedItem(int limit, int month)
     {
         for (Mobile mobile : list)
@@ -213,7 +211,7 @@ public class InventoryManagement implements  Functions{
         }
     }
 
-
+@Override
     public void displayWeeklyFrequentlyPurchasedItem(int limit, int week)
     {
         for (Mobile mobile : list)
@@ -225,7 +223,21 @@ public class InventoryManagement implements  Functions{
             }
         }
     }
-
+//    public void PurchasedMobile(Mobile mobile){
+//        if(purchasedList== null){
+//            purchasedList.add(mobile);
+//            System.out.println("done");
+//        }
+//        if(purchasedList!=null){
+//            for(Mobile mob:purchasedList){
+//                if(mob.getModel().equals(mobile.getModel())){
+//                    int q=mob.getStockQuantity();
+//                    System.out.println("done");
+//                    mob.setStockQuantity(q+1);
+//                }
+//            }
+//        }
+//    }
 
 
 }
