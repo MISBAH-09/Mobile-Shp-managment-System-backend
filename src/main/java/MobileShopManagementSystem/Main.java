@@ -36,11 +36,16 @@ public class Main
 //        System.out.println(iphone.getStockQuantity());
 //        System.out.println(iphone.getStock());
 
-//      inventoryManagement.purchaseAndCustomer("Hamza",iphone,"03238835146","02-Nov-2023");
+      inventoryManagement.purchaseAndCustomer("Hamza",iphone,"03238835146","02-Nov-2023");
+      inventoryManagement.purchaseAndCustomer("Ali",samsung,"03238835146","02-Nov-2023");
+
         File file = new File("Mobiles.txt");
-        inventoryManagement.storeDataToFile(file);
+        inventoryManagement.storeMobileDataToFile(file);
         inventoryManagement.readFromFile(file);
-//
+        File customerFile = new File("Customers.txt");
+        inventoryManagement.storeCustomerDataToFile(customerFile);
+        inventoryManagement.readFromFile(customerFile);
+
 
 
     }

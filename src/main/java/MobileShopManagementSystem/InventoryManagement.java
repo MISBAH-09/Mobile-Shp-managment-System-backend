@@ -169,15 +169,10 @@ public class InventoryManagement implements  Functions
     public void purchaseAndCustomer(String name, Mobile mobile, String phone,String date)
     {
         purchasedMobile(mobile.getModel());
-        customerAndPurchasesList.add(new CustomerAndPurchase(name,mobile, phone,date));
-        System.out.println
-                (
-                    "Customer Name: " + name +
-                    "       Phone Number: " + phone +
-                    "       Purchased Mobile Model: " + mobile.getModel() +
-                    "       Price: " + mobile.getPrice() +
-                    "       Date: " + date
-                );
+        CustomerAndPurchase customer = new CustomerAndPurchase(name,mobile, phone,date);
+        customerAndPurchasesList.add(customer);
+        customer.displayDetails();
+
     }
 
     @Override
@@ -228,31 +223,31 @@ public class InventoryManagement implements  Functions
         }
     }
 
-    @Override
-    public void displayMonthlyFrequentlyPurchasedItem(int limit, int month)
-    {
-        for (Mobile mobile : list)
-        {
-            if (mobile != null && mobile.getMonthlySales(month) > limit)
-            {
-                System.out.println(mobile.getModel());
-                System.out.println("\n");
-            }
-        }
-    }
-
-@Override
-    public void displayWeeklyFrequentlyPurchasedItem(int limit, int week)
-    {
-        for (Mobile mobile : list)
-        {
-            if (mobile != null && mobile.getWeeklySales(week) > limit)
-            {
-                System.out.println(mobile.getModel());
-                System.out.println("\n");
-            }
-        }
-    }
+//    @Override
+//    public void displayMonthlyFrequentlyPurchasedItem(int limit, int month)
+//    {
+//        for (Mobile mobile : list)
+//        {
+//            if (mobile != null && mobile.getMonthlySales(month) > limit)
+//            {
+//                System.out.println(mobile.getModel());
+//                System.out.println("\n");
+//            }
+//        }
+//    }
+//
+//@Override
+//    public void displayWeeklyFrequentlyPurchasedItem(int limit, int week)
+//    {
+//        for (Mobile mobile : list)
+//        {
+//            if (mobile != null && mobile.getWeeklySales(week) > limit)
+//            {
+//                System.out.println(mobile.getModel());
+//                System.out.println("\n");
+//            }
+//        }
+//    }
 
     public  void creatFile(File file)
     {
@@ -269,7 +264,7 @@ public class InventoryManagement implements  Functions
             }
         }
     }
-    public void storeDataToFile(File file)
+    public void storeMobileDataToFile(File file)
     {
         creatFile(file);
         try
@@ -290,6 +285,29 @@ public class InventoryManagement implements  Functions
             e.printStackTrace();
         }
     }
+
+    public void storeCustomerDataToFile(File file)
+    {
+        creatFile(file);
+        try
+        {
+            FileWriter fileWriter = new FileWriter(file);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            for(CustomerAndPurchase customer : customerAndPurchasesList)
+            {
+                bufferedWriter.write(customer.toString());
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.close();
+            fileWriter.close();
+            System.out.println("Customer Data Stored  Successfully In File: "+file.getName());
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
 
     public void readFromFile(File file)
     {

@@ -4,7 +4,6 @@ public class CustomerAndPurchase
 {
     private String customerName;
     private String mobileNo;
-
     private Mobile mobile;
     private double price;
     private String model;
@@ -12,11 +11,11 @@ public class CustomerAndPurchase
 
     public CustomerAndPurchase(String customerName, Mobile mobile, String mobileNo, String date)
     {
-        this.customerName = customerName;
-        this.mobileNo = mobileNo;
-        this.model = mobile.getModel();
-        this.price = mobile.getPrice();
-        this.date = date;
+        setCustomerName(customerName);
+        setModel(mobile.getModel());
+        setPrice(mobile.getPrice());
+        setDate(date);
+        setMobileNo(mobileNo);
     }
 
 
@@ -71,8 +70,25 @@ public class CustomerAndPurchase
         this.date = date;
     }
 
+    public void displayDetails()
+    {
+        System.out.println
+                (
+                                "Customer Name: " + getCustomerName() +
+                                "       Phone Number: " + getMobileNo() +
+                                "       Purchased Mobile Model: " + getModel() +
+                                "       Price: " + getPrice() +
+                                "       Date: " + getDate()
+                );
+    }
 
-
-
-
+    @Override
+    public String toString()
+    {
+        return  "Customer Name: " + getCustomerName() +
+                "       Phone Number: " + getMobileNo() +
+                "       Purchased Mobile Model: " + getModel() +
+                "       Price: " + getPrice() +
+                "       Date: " + getDate();
+    }
 }
