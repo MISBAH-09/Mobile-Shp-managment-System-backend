@@ -28,8 +28,8 @@ public class Main
         inventoryManagement.addPhone(iphone);
         inventoryManagement.addPhone(samsung);
         inventoryManagement.addPhone(infinix);
-        inventoryManagement.displayListOfMobile();
-        inventoryManagement.fetchPhone("IPhone 11");
+//        inventoryManagement.displayModel();
+//        inventoryManagement.fetchPhone("IPhone 11");
 //        inventoryManagement.UpdatePrice("IPhone 11",400000.3);
 //        inventoryManagement.purchasedMobile("Iphone");
 //        inventoryManagement.purchasedMobile("Iphone 11");
@@ -37,9 +37,9 @@ public class Main
 //        System.out.println(iphone.getStock());
 
 //      inventoryManagement.purchaseAndCustomer("Hamza",iphone,"03238835146","02-Nov-2023");
-//        File file = new File("Mobiles.txt");
-      //  inventoryManagement.storeDataToFile(file);
-       // inventoryManagement.readFromFile(file);
+        File file = new File("Mobiles.txt");
+        inventoryManagement.storeDataToFile(file);
+        inventoryManagement.readFromFile(file);
 //
 
 

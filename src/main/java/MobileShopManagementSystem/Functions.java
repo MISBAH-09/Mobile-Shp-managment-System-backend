@@ -18,7 +18,7 @@ public interface Functions
     boolean LowStock(Mobile mobile);
     void displayOutofStockMobile() throws IOException;
     void displayLowStockMobile();
-    void displayMonthlyFrequentlyPurchasedItem(int limit, int month);
-    void displayWeeklyFrequentlyPurchasedItem(int limit, int week);
+//    void displayMonthlyFrequentlyPurchasedItem(int limit, int month);
+//    void displayWeeklyFrequentlyPurchasedItem(int limit, int week);
 
 }
