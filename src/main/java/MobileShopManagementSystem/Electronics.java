@@ -1,5 +1,7 @@
 package MobileShopManagementSystem;
 
+import java.util.ArrayList;
+
 public class Electronics
 {
     private int id;
@@ -14,6 +16,9 @@ public class Electronics
     private String OS;
 
     private Stock stock;
+
+    private ArrayList<Integer> weeklySales;
+    private ArrayList<Integer> monthlySales;
 
     /*
     laptop
@@ -125,9 +130,32 @@ public class Electronics
         this.stock = stock;
     }
 
-    public void setOS(String OS) {
+    public void setOS(String OS)
+
+    {
         this.OS = OS;
     }
+
+    public int getWeeklySales(int week)
+    {
+        return weeklySales.get(week - 1);
+    }
+
+    public void setWeeklySales(int week, int quantitySold)
+    {
+        weeklySales.add(week-1, quantitySold);
+    }
+
+    public int getMonthlySales(int month)
+    {
+        return monthlySales.get(month - 1);
+    }
+
+    public void setMonthlySales(int month, int quantitySold)
+    {
+        monthlySales.add(month-1, quantitySold);
+    }
+
 
     @Override
     public String toString()

@@ -7,6 +7,7 @@ public class InventoryManagement implements  Functions{
     ArrayList<Mobile> list;
     ArrayList<Mobile> lowStock;
     ArrayList<Mobile> outOfStock;
+    ArrayList<Mobile> purchasedList;
 
 
 
@@ -141,8 +142,7 @@ public class InventoryManagement implements  Functions{
             if(mobile != null && mobile.getModel().equals(model))
             {
                 System.out.println(mobile.getModel() + " has been Purchased");
-                mobile.setStockQuantity(mobile.getStockQuantity()-1);
-
+                mobile.setStockQuantity(mobile.getStockQuantity() - 1);
                 if(mobile.getStockQuantity() == 0)
                 {
                     mobile.setStock(Stock.OUT_OF_STOCK);
@@ -199,6 +199,33 @@ public class InventoryManagement implements  Functions{
             }
         }
     }
+
+
+    public void displayMonthlyFrequentlyPurchasedItem(int limit, int month)
+    {
+        for (Mobile mobile : list)
+        {
+            if (mobile != null && mobile.getMonthlySales(month) > limit)
+            {
+                System.out.println(mobile.getModel());
+                System.out.println("\n");
+            }
+        }
+    }
+
+
+    public void displayWeeklyFrequentlyPurchasedItem(int limit, int week)
+    {
+        for (Mobile mobile : list)
+        {
+            if (mobile != null && mobile.getWeeklySales(week) > limit)
+            {
+                System.out.println(mobile.getModel());
+                System.out.println("\n");
+            }
+        }
+    }
+
 
 
 }
