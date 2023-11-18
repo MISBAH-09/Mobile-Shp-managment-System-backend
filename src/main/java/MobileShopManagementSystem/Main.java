@@ -26,13 +26,13 @@ public class Main
 
 
 
-        inventoryManagement.addPhone(iphone);
-        inventoryManagement.addPhone(samsung);
-        inventoryManagement.addPhone(infinix);
-        inventoryManagement.displayModel();
-        inventoryManagement.fetchPhone("IPhone 11");
-        inventoryManagement.UpdatePrice("IPhone 11",400000.3);
-
+//        inventoryManagement.addPhone(iphone);
+//        inventoryManagement.addPhone(samsung);
+//        inventoryManagement.addPhone(infinix);
+//        inventoryManagement.displayModel();
+//        inventoryManagement.fetchPhone("IPhone 11");
+//        inventoryManagement.UpdatePrice("IPhone 11",400000.3);
+//
 
 
     }

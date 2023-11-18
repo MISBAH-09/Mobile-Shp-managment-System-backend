@@ -5,17 +5,11 @@ import java.util.ArrayList;
 public class InventoryManagement implements  Functions{
 
     ArrayList<Mobile> list;
-    ArrayList<Iphone> listOfIphone;
-    ArrayList<Infinix> listOfInfinix;
-    ArrayList<Samsung> listOfSamsung;
 
 
     public InventoryManagement()
     {
         this.list = new ArrayList<>();
-        this.listOfIphone = new ArrayList<>();
-        this.listOfInfinix = new ArrayList<>();
-        this.listOfSamsung = new ArrayList<>();
     }
 
     @Override
@@ -26,19 +20,6 @@ public class InventoryManagement implements  Functions{
             Mobile mobile = (Mobile) object;
             list.add(mobile);
             System.out.println("Mobile Phone Added Successfully");
-
-            if(mobile instanceof Iphone)
-            {
-                listOfIphone.add((Iphone) mobile);
-            }
-            else if(mobile instanceof Infinix)
-            {
-                listOfInfinix.add((Infinix) mobile);
-            }
-            else if(mobile instanceof Samsung)
-            {
-                listOfSamsung.add((Samsung) mobile);
-            }
         }
         else
         {
@@ -60,28 +41,33 @@ public class InventoryManagement implements  Functions{
             break;
         }
     }
-    @Override
+
+
     public void DisplayListOfMobileByCompany(Company company)
     {
-        if (company.equals(Company.APPLE))
+        for (Mobile mobile : list)
         {
-           displayModel();
+            if(mobile != null && mobile.getStock().equals(Stock.AVAILABLE) &&
+                    mobile.getCompany().equals(company))
+            {
+                System.out.println(mobile.getModel());
+            }
         }
-        if (company.equals(Company.INFINIX))
-        {
-            displayModel();
-        }
-        if (company.equals(Company.SAMSUNG))
-        {
-            displayModel();
-        }
-
-
     }
 
+    public void DisplayListOfMobileByPrice(double lowerPrice, double upperPrice)
+    {
+        for (Mobile mobile : list)
+        {
+            if(mobile != null && mobile.getPrice() >= lowerPrice && mobile.getPrice() <= upperPrice)
+            {
+                System.out.println(mobile.getModel());
+            }
+        }
+    }
 
     @Override
-    public void displayModel()
+    public void displayListOfMobile()
     {
         for(Mobile mobile:list)
         {
@@ -92,7 +78,8 @@ public class InventoryManagement implements  Functions{
         }
     }
     @Override
-    public void UpdatePrice(String Model,double Price){
+    public void UpdatePrice(String Model,double Price)
+    {
         Model = Model.toUpperCase();
 
         for (Mobile mobile : list)
