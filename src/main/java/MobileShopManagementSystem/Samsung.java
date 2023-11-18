@@ -8,7 +8,7 @@ public class Samsung extends Mobile
                    Condition condition, double price, String battery_capacity,
                    String OS, String camera, String colour, int SIM_capacity) {
         super(Company.SAMSUNG, Model, RAM_GB, dimension, stockQuantity, Status.NOT_SALED, condition,
-                price, battery_capacity, OS, camera, colour);
+                price, battery_capacity, OS, camera, colour, Stock.AVAILABLE);
         setSIM_capacity(SIM_capacity);
     }
 

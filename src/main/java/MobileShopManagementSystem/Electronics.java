@@ -14,6 +14,8 @@ public class Electronics
     private String battery_capacity;
     private String OS;
 
+    private Stock stock;
+
     /*
     laptop
     generation , intel core, processor type
@@ -23,7 +25,10 @@ public class Electronics
 
     private static int counter = 0;
 
-    public Electronics(Company company, String Model, int RAM_GB, Dimensions dimension, int stockQuantity, Status status, Condition condition, double price, String battery_capacity, String OS)
+    public Electronics(Company company, String Model, int RAM_GB,
+                       Dimensions dimension, int stockQuantity,
+                       Status status, Condition condition, double price,
+                       String battery_capacity, String OS,Stock stock)
     {
         this.id = ++counter;
         setCompany(company);
@@ -36,6 +41,7 @@ public class Electronics
         setPrice(price);
         setBattery_capacity(battery_capacity);
         setOS(OS);
+        setStock(stock);
 
     }
 
@@ -120,6 +126,14 @@ public class Electronics
 
     public String getOS() {
         return OS;
+    }
+
+    public Stock getStock() {
+        return stock;
+    }
+
+    public void setStock(Stock stock) {
+        this.stock = stock;
     }
 
     public void setOS(String OS) {

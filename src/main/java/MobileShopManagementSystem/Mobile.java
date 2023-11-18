@@ -6,8 +6,8 @@ public class Mobile extends Electronics
         private String colour;
 
     public Mobile(Company company, String Model, int RAM_GB, Dimensions dimension,
-                  int stockQuantity, Status status, Condition condition, double price, String battery_capacity, String OS, String camera, String colour) {
-        super(company, Model, RAM_GB, dimension, stockQuantity, Status.NOT_SALED, condition, price, battery_capacity, OS);
+                  int stockQuantity, Status status, Condition condition, double price, String battery_capacity, String OS, String camera, String colour,Stock stock) {
+        super(company, Model, RAM_GB, dimension, stockQuantity, Status.NOT_SALED, condition, price, battery_capacity, OS, stock);
         Camera = camera;
         this.colour = colour;
     }

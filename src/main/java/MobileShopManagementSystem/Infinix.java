@@ -7,7 +7,7 @@ public class Infinix extends Mobile {
                    Condition condition, double price, String battery_capacity, String OS,
                    String camera, String colour, String broweser, String specialFeatures) {
         super(Company.INFINIX, Model, RAM_GB, dimension, stockQuantity, Status.NOT_SALED, condition, price, battery_capacity,
-                OS, camera, colour);
+                OS, camera, colour, Stock.AVAILABLE);
         setBroweser(broweser);
         setSpecialFeatures(specialFeatures);
     }
