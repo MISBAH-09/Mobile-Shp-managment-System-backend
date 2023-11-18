@@ -8,7 +8,6 @@ public class Electronics
     private int RAM_GB;
     private Dimensions dimension;
     private int stockQuantity;
-    private Status status;
     private Condition condition;
     private double price;
     private String battery_capacity;
@@ -27,7 +26,7 @@ public class Electronics
 
     public Electronics(Company company, String Model, int RAM_GB,
                        Dimensions dimension, int stockQuantity,
-                       Status status, Condition condition, double price,
+                       Condition condition, double price,
                        String battery_capacity, String OS,Stock stock)
     {
         this.id = ++counter;
@@ -36,7 +35,6 @@ public class Electronics
         setRAM_GB(RAM_GB);
         setDimension(dimension);
         setStockQuantity(stockQuantity);
-        setStatus(status);
         setCondition(condition);
         setPrice(price);
         setBattery_capacity(battery_capacity);
@@ -91,15 +89,6 @@ public class Electronics
     public void setPrice(double price) {
         this.price = price;
     }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
     public Condition getCondition() {
         return condition;
     }
@@ -145,10 +134,10 @@ public class Electronics
     {
         return  String.format("ID: %15d\nCompany: %14s\n" +
                         "Model: %20s\nRam: %14d\nDimension: %18s\n" +
-                        "Stock Quantity: %3d\nStatus: %19s\nCondition: %10s\n" +
+                        "Stock Quantity: %3d\nCondition: %10s\n" +
                         "Price: %19.2f\nBattery Capacity: %5s\nOS: %17s\n"
                 ,getId(), getCompany(),getModel(),getRAM_GB(),getDimension(),
-                getStockQuantity(),getStatus(),getCondition(), getPrice(),
+                getStockQuantity(),getCondition(), getPrice(),
                 getBattery_capacity(),getOS());
 
     }

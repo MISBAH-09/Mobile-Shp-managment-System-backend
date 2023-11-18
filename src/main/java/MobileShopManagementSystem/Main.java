@@ -8,7 +8,7 @@ public class Main
         InventoryManagement inventoryManagement = new InventoryManagement();
 
         Mobile iphone = new Iphone("IPhone 11",5,
-                new Dimensions(34,56,6),6,
+                new Dimensions(34,56,6),2,
                 Condition.NEW,34111.3,"4 hrs","IOS",
                 "12 px","Black","6; 2.6","Wired",
                 "FaceID/TouchID");
@@ -24,14 +24,16 @@ public class Main
                 "12 px","Black","Google","Dual Sim");
 
 
-
-
 //        inventoryManagement.addPhone(iphone);
 //        inventoryManagement.addPhone(samsung);
 //        inventoryManagement.addPhone(infinix);
 //        inventoryManagement.displayModel();
 //        inventoryManagement.fetchPhone("IPhone 11");
 //        inventoryManagement.UpdatePrice("IPhone 11",400000.3);
+//        inventoryManagement.purchasedMobile("Iphone");
+//        inventoryManagement.purchasedMobile("Iphone 11");
+//        System.out.println(iphone.getStockQuantity());
+//        System.out.println(iphone.getStock());
 //
 
 

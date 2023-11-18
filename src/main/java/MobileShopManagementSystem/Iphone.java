@@ -7,8 +7,8 @@ public class Iphone extends Apple {
                    Condition condition, double price, String battery_capacity,
                   String OS, String camera, String colour, String IOS_Version, String networkType,
                   String specialAttributes) {
-        super(Company.APPLE, Model, RAM_GB, dimension, stockQuantity, Status.NOT_SALED, condition, price,
-                battery_capacity, OS, camera, colour, IOS_Version);
+        super(Company.APPLE, Model, RAM_GB, dimension, stockQuantity, condition, price,
+                battery_capacity, OS, camera, colour,Stock.AVAILABLE, IOS_Version);
         setNetworkType(networkType);
         setSpecialAttributes(specialAttributes);
     }
@@ -39,7 +39,7 @@ public class Iphone extends Apple {
                         "Colour: %15s\nCamera: %15s\nIOS Version: %11s\n" +
                         "Network Type: %9s\nSpeciality: %20s\n"
                 ,getId(), getCompany(),getModel(),getRAM_GB(),getDimension(),
-                getStockQuantity(),getStatus(),getCondition(), getPrice(),
+                getStockQuantity(),getCondition(), getPrice(),
                 getBattery_capacity(),getOS(),getColour(),getCamera(),
                 getIOS_Version(),getNetworkType(),getSpecialAttributes());
 
