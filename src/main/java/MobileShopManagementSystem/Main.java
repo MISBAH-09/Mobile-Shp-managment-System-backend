@@ -25,8 +25,8 @@ public class Main
 
 
         inventoryManagement.addPhone(iphone);
-//        inventoryManagement.addPhone(samsung);
-//        inventoryManagement.addPhone(infinix);
+        inventoryManagement.addPhone(samsung);
+        inventoryManagement.addPhone(infinix);
 //        inventoryManagement.displayModel();
 //        inventoryManagement.fetchPhone("IPhone 11");
 //        inventoryManagement.UpdatePrice("IPhone 11",400000.3);
@@ -35,7 +35,8 @@ public class Main
 //        System.out.println(iphone.getStockQuantity());
 //        System.out.println(iphone.getStock());
 
-        inventoryManagement.purchaseAndCustomer("Hamza",iphone,"03238835146","02-Nov-2023");
+//        inventoryManagement.purchaseAndCustomer("Hamza",iphone,"03238835146","02-Nov-2023");
+        inventoryManagement.storeDataToFile("Mobiles.txt");
 //
 
 

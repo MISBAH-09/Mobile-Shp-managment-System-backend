@@ -1,10 +1,13 @@
 package MobileShopManagementSystem;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class InventoryManagement implements  Functions
 {
-    private double revenue = 0.0;
     ArrayList<Mobile> list;
     ArrayList<Mobile> lowStock;
     ArrayList<Mobile> outOfStock;
@@ -151,8 +154,6 @@ public class InventoryManagement implements  Functions
                 {
                     mobile.setStock(Stock.OUT_OF_STOCK);
                 }
-//                revenue += mobile.getPrice();
-                System.out.println(mobile.getModel() + " has been Purchased");
 
                 if(!(purchasedList.contains(mobile)))
                 {
@@ -163,6 +164,7 @@ public class InventoryManagement implements  Functions
                     mobile.setPurchasedStock(mobile.getPurchasedStock() + 1);
                 }
             }
+
             break;
         }
     }
@@ -196,7 +198,7 @@ public class InventoryManagement implements  Functions
     @Override
     public boolean LowStock(Mobile mobile)
     {
-        int stock  = mobile.getStockQuantity() / 2;
+        int stock = mobile.getStockQuantity() / 2;
         if(mobile != null && mobile.getStockQuantity() < stock)
         {
             lowStock.add(mobile);
@@ -251,6 +253,32 @@ public class InventoryManagement implements  Functions
             {
                 System.out.println(mobile.getModel());
                 System.out.println("\n");
+            }
+        }
+    }
+
+    public void storeDataToFile(String fileName)
+    {
+        if(!fileName.isEmpty())
+        {
+            File file = new File(fileName);
+            try
+            {
+                FileWriter fileWriter = new FileWriter(file,true);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+                for(Mobile mobile : list)
+                {
+                    bufferedWriter.write(mobile.toString());
+                    bufferedWriter.newLine();
+                }
+
+                bufferedWriter.close();
+                fileWriter.close();
+                System.out.println("Mobile Data Stored  Successfully In File: "+file.getName());
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
             }
         }
     }

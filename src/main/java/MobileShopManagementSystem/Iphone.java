@@ -39,7 +39,7 @@ public class Iphone extends Apple {
                         "Colour: %15s\nCamera: %15s\nIOS Version: %11s\n" +
                         "Network Type: %9s\nSpeciality: %20s\n"
                 ,getId(), getCompany(),getModel(),getRAM_GB(),getDimension(),
-                getStockQuantity(),getCondition(),getStockQuantity(),getPrice(),
+                getStockQuantity(),getCondition(),getPrice(),
                 getBattery_capacity(),getOS(),getColour(),getCamera(),
                 getIOS_Version(),getNetworkType(),getSpecialAttributes());
         //Status: %19s

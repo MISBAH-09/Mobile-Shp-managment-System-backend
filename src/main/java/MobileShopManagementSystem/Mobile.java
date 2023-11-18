@@ -1,6 +1,6 @@
 package MobileShopManagementSystem;
 
-public class Mobile extends Electronics
+public abstract class Mobile extends Electronics
     {
         private String Camera;
         private String colour;
