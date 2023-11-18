@@ -1,4 +1,5 @@
 package MobileShopManagementSystem;
+import java.io.File;
 import java.util.ArrayList;
 
 public class Main
@@ -35,8 +36,10 @@ public class Main
 //        System.out.println(iphone.getStockQuantity());
 //        System.out.println(iphone.getStock());
 
-//        inventoryManagement.purchaseAndCustomer("Hamza",iphone,"03238835146","02-Nov-2023");
-        inventoryManagement.storeDataToFile("Mobiles.txt");
+//      inventoryManagement.purchaseAndCustomer("Hamza",iphone,"03238835146","02-Nov-2023");
+        File file = new File("Mobiles.txt");
+        inventoryManagement.storeDataToFile(file);
+        inventoryManagement.readFromFile(file);
 //
 
 

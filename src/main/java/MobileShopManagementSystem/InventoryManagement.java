@@ -1,9 +1,6 @@
 package MobileShopManagementSystem;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class InventoryManagement implements  Functions
@@ -257,31 +254,68 @@ public class InventoryManagement implements  Functions
         }
     }
 
-    public void storeDataToFile(String fileName)
+    public  void creatFile(File file)
     {
-        if(!fileName.isEmpty())
+        if(!file.exists())
         {
-            File file = new File(fileName);
             try
             {
-                FileWriter fileWriter = new FileWriter(file,true);
-                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-                for(Mobile mobile : list)
-                {
-                    bufferedWriter.write(mobile.toString());
-                    bufferedWriter.newLine();
-                }
-
-                bufferedWriter.close();
-                fileWriter.close();
-                System.out.println("Mobile Data Stored  Successfully In File: "+file.getName());
+                file.createNewFile();
             }
+
             catch (IOException e)
             {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
         }
     }
+    public void storeDataToFile(File file)
+    {
+        creatFile(file);
+        try
+        {
+            FileWriter fileWriter = new FileWriter(file,true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            for(Mobile mobile : list)
+            {
+                bufferedWriter.write(mobile.toString());
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.close();
+            fileWriter.close();
+            System.out.println("Mobile Data Stored  Successfully In File: "+file.getName());
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void readFromFile(File file)
+    {
+        String line;
+        try
+        {
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            while ((line = bufferedReader.readLine()) != null)
+            {
+                int i = 0;
+                System.out.println(line);
+                i++;
+            }
+
+        }
+        catch (FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 
 }
