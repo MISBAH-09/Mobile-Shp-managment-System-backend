@@ -2,12 +2,14 @@ package MobileShopManagementSystem;
 
 import java.util.ArrayList;
 
-public class InventoryManagement implements  Functions{
-
+public class InventoryManagement implements  Functions
+{
+    private double revenue = 0.0;
     ArrayList<Mobile> list;
     ArrayList<Mobile> lowStock;
     ArrayList<Mobile> outOfStock;
-    ArrayList<PurchasedMobile> purchasedList;
+    ArrayList<Mobile> purchasedList;
+    ArrayList<CustomerAndPurchase> customerAndPurchasesList;
 
 
     public InventoryManagement()
@@ -15,6 +17,8 @@ public class InventoryManagement implements  Functions{
         this.list = new ArrayList<>();
         this.lowStock = new ArrayList<>();
         this.outOfStock = new ArrayList<>();
+        this.purchasedList = new ArrayList<>();
+        this.customerAndPurchasesList = new ArrayList<>();
     }
 
     @Override
@@ -117,7 +121,8 @@ public class InventoryManagement implements  Functions{
     {
         model = model.toUpperCase();
 
-        for (Mobile mobile : list) {
+        for (Mobile mobile : list)
+        {
             if (mobile != null && mobile.getModel().equals(model))
             {
                 mobile.setStockQuantity(stockQunatity);
@@ -137,20 +142,46 @@ public class InventoryManagement implements  Functions{
 
         for (Mobile mobile : list)
         {
-            if(mobile != null && mobile.getModel().equals(model))
+            if(mobile != null && mobile.getStock().equals(Stock.AVAILABLE) &&
+                    mobile.getModel().equals(model))
             {
-                System.out.println(mobile.getModel() + " has been Purchased");
                 mobile.setStockQuantity(mobile.getStockQuantity() - 1);
+
                 if(mobile.getStockQuantity() == 0)
                 {
                     mobile.setStock(Stock.OUT_OF_STOCK);
+                }
+//                revenue += mobile.getPrice();
+                System.out.println(mobile.getModel() + " has been Purchased");
+
+                if(!(purchasedList.contains(mobile)))
+                {
+                    purchasedList.add(mobile);
+                }
+                else
+                {
+                    mobile.setPurchasedStock(mobile.getPurchasedStock() + 1);
                 }
             }
             break;
         }
     }
 
-@Override
+    public void purchaseAndCustomer(String name, Mobile mobile, String phone,String date)
+    {
+        purchasedMobile(mobile.getModel());
+        customerAndPurchasesList.add(new CustomerAndPurchase(name,mobile, phone,date));
+        System.out.println
+                (
+                    "Customer Name: " + name +
+                    "       Phone Number: " + phone +
+                    "       Purchased Mobile Model: " + mobile.getModel() +
+                    "       Price: " + mobile.getPrice() +
+                    "       Date: " + date
+                );
+    }
+
+    @Override
     public boolean OutOfStock(Mobile mobile)
     {
         if(mobile != null && mobile.getStockQuantity() == 0)
@@ -162,7 +193,7 @@ public class InventoryManagement implements  Functions{
 
         return false;
     }
-@Override
+    @Override
     public boolean LowStock(Mobile mobile)
     {
         int stock  = mobile.getStockQuantity() / 2;
@@ -174,7 +205,7 @@ public class InventoryManagement implements  Functions{
         return false;
     }
 
-@Override
+    @Override
     public void displayOutofStockMobile()
     {
         for (Mobile mobile : list)
@@ -186,7 +217,7 @@ public class InventoryManagement implements  Functions{
         }
     }
 
-@Override
+    @Override
     public void displayLowStockMobile()
     {
         for (Mobile mobile : list)
@@ -198,7 +229,7 @@ public class InventoryManagement implements  Functions{
         }
     }
 
-@Override
+    @Override
     public void displayMonthlyFrequentlyPurchasedItem(int limit, int month)
     {
         for (Mobile mobile : list)
@@ -223,21 +254,6 @@ public class InventoryManagement implements  Functions{
             }
         }
     }
-//    public void PurchasedMobile(Mobile mobile){
-//        if(purchasedList== null){
-//            purchasedList.add(mobile);
-//            System.out.println("done");
-//        }
-//        if(purchasedList!=null){
-//            for(Mobile mob:purchasedList){
-//                if(mob.getModel().equals(mobile.getModel())){
-//                    int q=mob.getStockQuantity();
-//                    System.out.println("done");
-//                    mob.setStockQuantity(q+1);
-//                }
-//            }
-//        }
-//    }
 
 
 }

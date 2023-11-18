@@ -25,17 +25,19 @@ public class Main
 
 
         inventoryManagement.addPhone(iphone);
-        inventoryManagement.addPhone(samsung);
-        inventoryManagement.addPhone(infinix);
-        inventoryManagement.fetchPhone("IPhone 11");
-        inventoryManagement.purchasedMobile("IPhone 11");
-        System.out.println(inventoryManagement.purchasedList);
+//        inventoryManagement.addPhone(samsung);
+//        inventoryManagement.addPhone(infinix);
+//        inventoryManagement.displayModel();
+//        inventoryManagement.fetchPhone("IPhone 11");
 //        inventoryManagement.UpdatePrice("IPhone 11",400000.3);
 //        inventoryManagement.purchasedMobile("Iphone");
 //        inventoryManagement.purchasedMobile("Iphone 11");
 //        System.out.println(iphone.getStockQuantity());
 //        System.out.println(iphone.getStock());
+
+        inventoryManagement.purchaseAndCustomer("Hamza",iphone,"03238835146","02-Nov-2023");
 //
+
 
     }
 }

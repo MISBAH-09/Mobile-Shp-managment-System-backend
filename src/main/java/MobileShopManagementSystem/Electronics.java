@@ -16,6 +16,7 @@ public class Electronics
     private String OS;
 
     private Stock stock;
+    private int purchasedStock = 0;
 
     private ArrayList<Integer> weeklySales;
     private ArrayList<Integer> monthlySales;
@@ -154,6 +155,14 @@ public class Electronics
     public void setMonthlySales(int month, int quantitySold)
     {
         monthlySales.add(month-1, quantitySold);
+    }
+
+    public int getPurchasedStock() {
+        return purchasedStock;
+    }
+
+    public void setPurchasedStock(int purchasedStock) {
+        this.purchasedStock = purchasedStock;
     }
 
 
