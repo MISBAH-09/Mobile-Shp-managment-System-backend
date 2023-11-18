@@ -3,7 +3,7 @@ package MobileShopManagementSystem;
 public interface Functions
 {
     void addPhone(Object object);
-    void fetchPhone();
-    void display();
+    void fetchPhone(String model);
+    void displayModel();
 
 }

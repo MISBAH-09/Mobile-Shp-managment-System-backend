@@ -1,16 +1,22 @@
 package MobileShopManagementSystem;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class InventoryManagement implements  Functions{
 
     ArrayList<Mobile> list;
-    Scanner input = new Scanner(System.in);
+    ArrayList<Iphone> listOfIphone;
+    ArrayList<Infinix> listOfInfinix
+            ;
+    ArrayList<Samsung> listOfSamsung;
+
 
     public InventoryManagement()
     {
         this.list = new ArrayList<>();
+        this.listOfIphone = new ArrayList<>();
+        this.listOfInfinix = new ArrayList<>();
+        this.listOfSamsung = new ArrayList<>();
     }
 
     @Override
@@ -21,6 +27,19 @@ public class InventoryManagement implements  Functions{
             Mobile mobile = (Mobile) object;
             list.add(mobile);
             System.out.println("Mobile Phone Added Successfully");
+
+            if(mobile instanceof Iphone)
+            {
+                listOfIphone.add((Iphone) mobile);
+            }
+            else if(mobile instanceof Infinix)
+            {
+                listOfInfinix.add((Infinix) mobile);
+            }
+            else if(mobile instanceof Samsung)
+            {
+                listOfSamsung.add((Samsung) mobile);
+            }
         }
         else
         {
@@ -29,53 +48,53 @@ public class InventoryManagement implements  Functions{
     }
 
     @Override
-    public void fetchPhone()
+    public void fetchPhone(String model)
     {
-        System.out.println("Fetch by: ");
-        System.out.println("1......ID  2...... By Model");
-        int choice = input.nextInt();
-        switch (choice)
+        model = model.toUpperCase();
+
+        for (Mobile mobile : list)
         {
-            case 1:
+            if(mobile != null && mobile.getModel().equals(model))
             {
-                System.out.println("Enter ID");
-                int id = input.nextInt();
-                for (Mobile mobile : list)
-                {
-                    Mobile mobileVar = list.get(id - 1);
-                    System.out.println(mobileVar);
-                    break;
-                }
+                System.out.println(mobile);
             }
-
-            case 2:
-            {
-                System.out.println("Enter Model");
-                String model = input.nextLine();
-                for (Mobile mobile : list)
-                {
-                    if(mobile != null && mobile.getModel().equals(model))
-                    {
-                        System.out.println(mobile);
-                    }
-                    break;
-                }
-            }
-
+            break;
         }
     }
 
+    public void DisplayListOfMobileByCompany(Company company)
+    {
+        if (company.equals(Company.APPLE))
+        {
+           displayModel();
+        }
+        if (company.equals(Company.INFINIX))
+        {
+            displayModel();
+        }
+        if (company.equals(Company.SAMSUNG))
+        {
+            displayModel();
+        }
+
+
+    }
+
+
     @Override
-    public void display()
+    public void displayModel()
     {
         for(Mobile mobile:list)
         {
             if (mobile != null)
             {
-                System.out.println(mobile);
+                System.out.println(mobile.getModel());
             }
         }
     }
+
+
+//    public void
 
 
 

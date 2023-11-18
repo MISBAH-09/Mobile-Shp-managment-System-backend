@@ -72,7 +72,9 @@ public class Electronics
         return Model;
     }
 
-    public void setModel(String model) {
+    public void setModel(String model)
+    {
+        model = model.toUpperCase();
         Model = model;
     }
 
