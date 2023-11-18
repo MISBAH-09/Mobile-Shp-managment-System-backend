@@ -10,6 +10,8 @@ public class InventoryManagement implements  Functions
     ArrayList<Mobile> outOfStock;
     ArrayList<Mobile> purchasedList;
     ArrayList<CustomerAndPurchase> customerAndPurchasesList;
+    File file = new File("Mobile.txt");
+    File purchasedfile=new File("PurchasedMobile.txt");
 
 
     public InventoryManagement()
@@ -24,43 +26,95 @@ public class InventoryManagement implements  Functions
     @Override
     public void addPhone(Object object)
     {
-        if (object instanceof Mobile)
+        creatFile(file);
+        try
         {
-            Mobile mobile = (Mobile) object;
-            list.add(mobile);
-            System.out.println("Mobile Phone Added Successfully");
+            FileWriter fileWriter = new FileWriter(file,true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            if (object instanceof Mobile)
+            {
+                Mobile mobile = (Mobile) object;
+                list.add(mobile);
+                System.out.println("Mobile Phone Added Successfully");
+                bufferedWriter.write(mobile.toString());
+                bufferedWriter.newLine();
+            }
+            else
+            {
+                System.out.println("Error");
+            }
+            bufferedWriter.close();
+            fileWriter.close();
+            System.out.println("Mobile Data Stored  Successfully In File: "+file.getName());
         }
-        else
+        catch (IOException e)
         {
-            System.out.println("Error");
+            e.printStackTrace();
         }
-    }
+
+        }
 
     @Override
     public void fetchPhone(String model)
     {
-        model = model.toUpperCase();
-
-        for (Mobile mobile : list)
+        try
         {
-            if(mobile != null && mobile.getModel().equals(model))
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            while (( bufferedReader.readLine()) != null)
             {
-                System.out.println(mobile);
+                model = model.toUpperCase();
+                for (Mobile mobile : list)
+                {
+                    if(mobile != null && mobile.getModel().equals(model))
+                    {
+                        System.out.println(mobile);
+                    }
+                }
+                break;
             }
-            break;
+
         }
+        catch (FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
+        catch(IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+
+
     }
 
 @Override
     public void DisplayListOfMobileByCompany(Company company)
     {
-        for (Mobile mobile : list)
+        try
         {
-            if(mobile != null && mobile.getStock().equals(Stock.AVAILABLE) &&
-                    mobile.getCompany().equals(company))
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            while (( bufferedReader.readLine()) != null)
             {
-                System.out.println(mobile.getModel());
+                for (Mobile mobile : list)
+                {
+                    if(mobile != null && mobile.getStock().equals(Stock.AVAILABLE) &&
+                            mobile.getCompany().equals(company))
+                    {
+                        System.out.println(mobile.getModel());
+                    }
+                }
+                break;
             }
+
+        }
+        catch (FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
+        catch(IOException e)
+        {
+            throw new RuntimeException(e);
         }
     }
 @Override
@@ -77,29 +131,66 @@ public class InventoryManagement implements  Functions
 @Override
     public void DisplayListOfMobileByCompanyAndPrice(Company company, double lowerPrice, double upperPrice)
     {
-        for (Mobile mobile : list)
+        try
         {
-            if(mobile != null && mobile.getStock().equals(Stock.AVAILABLE) &&
-                    mobile.getCompany().equals(company))
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            while ((bufferedReader.readLine()) != null)
             {
-                if(mobile.getPrice() >= lowerPrice && mobile.getPrice() <= upperPrice)
+                for (Mobile mobile : list)
                 {
-                    System.out.println(mobile.getModel());
+                    if(mobile != null && mobile.getStock().equals(Stock.AVAILABLE) &&
+                            mobile.getCompany().equals(company))
+                    {
+                        if(mobile.getPrice() >= lowerPrice && mobile.getPrice() <= upperPrice)
+                        {
+                            System.out.println(mobile.getModel());
+                        }
+                    }
                 }
+                break;
             }
+
+        }
+        catch (FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
+        catch(IOException e)
+        {
+            throw new RuntimeException(e);
         }
     }
 
     @Override
     public void displayListOfMobile()
     {
-        for(Mobile mobile : list)
+        try
         {
-            if (mobile != null)
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            while ((bufferedReader.readLine()) != null)
             {
-                System.out.println(mobile.getModel());
+                for(Mobile mobile : list)
+                {
+                    if (mobile != null)
+                    {
+                        System.out.println(mobile.getModel());
+                    }
+                }
+                break;
             }
+
         }
+        catch (FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
+        catch(IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @Override
@@ -181,15 +272,17 @@ public class InventoryManagement implements  Functions
     }
 
     @Override
-    public boolean OutOfStock(Mobile mobile)
-    {
-        if(mobile != null && mobile.getStockQuantity() == 0)
-        {
-             mobile.setStock(Stock.OUT_OF_STOCK);
-             outOfStock.add(mobile);
-             return true;
-        }
+    public boolean OutOfStock(Mobile mobile) throws IOException {
 
+        FileReader fileReader = new FileReader(file);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        while ((bufferedReader.readLine()) != null) {
+            if (mobile != null && mobile.getStockQuantity() == 0) {
+                mobile.setStock(Stock.OUT_OF_STOCK);
+                outOfStock.add(mobile);
+                return true;
+            }
+        }
         return false;
     }
     @Override
@@ -205,8 +298,7 @@ public class InventoryManagement implements  Functions
     }
 
     @Override
-    public void displayOutofStockMobile()
-    {
+    public void displayOutofStockMobile() throws IOException {
         for (Mobile mobile : list)
         {
             if(OutOfStock(mobile))
@@ -269,53 +361,53 @@ public class InventoryManagement implements  Functions
             }
         }
     }
-    public void storeDataToFile(File file)
-    {
-        creatFile(file);
-        try
-        {
-            FileWriter fileWriter = new FileWriter(file,true);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            for(Mobile mobile : list)
-            {
-                bufferedWriter.write(mobile.toString());
-                bufferedWriter.newLine();
-            }
-            bufferedWriter.close();
-            fileWriter.close();
-            System.out.println("Mobile Data Stored  Successfully In File: "+file.getName());
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
+//    public void storeDataToFile(File file)
+//    {
+//        creatFile(file);
+//        try
+//        {
+//            FileWriter fileWriter = new FileWriter(file,true);
+//            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+//            for(Mobile mobile : list)
+//            {
+//                bufferedWriter.write(mobile.toString());
+//                bufferedWriter.newLine();
+//            }
+//            bufferedWriter.close();
+//            fileWriter.close();
+//            System.out.println("Mobile Data Stored  Successfully In File: "+file.getName());
+//        }
+//        catch (IOException e)
+//        {
+//            e.printStackTrace();
+//        }
+//    }
 
-    public void readFromFile(File file)
-    {
-        String line;
-        try
-        {
-            FileReader fileReader = new FileReader(file);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            while ((line = bufferedReader.readLine()) != null)
-            {
-                int i = 0;
-                System.out.println(line);
-                i++;
-            }
-
-        }
-        catch (FileNotFoundException e)
-        {
-            throw new RuntimeException(e);
-        }
-        catch (IOException e)
-        {
-            throw new RuntimeException(e);
-        }
-    }
-
+//    public void readFromFile(File file)
+//    {
+//        String line;
+//        try
+//        {
+//            FileReader fileReader = new FileReader(file);
+//            BufferedReader bufferedReader = new BufferedReader(fileReader);
+//            while ((line = bufferedReader.readLine()) != null)
+//            {
+//                int i = 0;
+//                System.out.println(line);
+//                i++;
+//            }
+//
+//        }
+//        catch (FileNotFoundException e)
+//        {
+//            throw new RuntimeException(e);
+//        }
+//        catch(IOException e)
+//        {
+//            throw new RuntimeException(e);
+//        }
+////    }
+//
 
 
 }

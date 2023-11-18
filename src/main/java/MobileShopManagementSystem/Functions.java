@@ -1,5 +1,8 @@
 package MobileShopManagementSystem;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public interface Functions
 {
     void addPhone(Object object);
@@ -11,9 +14,9 @@ public interface Functions
     void DisplayListOfMobileByCompanyAndPrice(Company company, double lowerPrice, double upperPrice);
     void UpdateStock(String model, int stockQunatity);
     void purchasedMobile(String model);
-    boolean OutOfStock(Mobile mobile);
+    boolean OutOfStock(Mobile mobile) throws IOException;
     boolean LowStock(Mobile mobile);
-    void displayOutofStockMobile();
+    void displayOutofStockMobile() throws IOException;
     void displayLowStockMobile();
     void displayMonthlyFrequentlyPurchasedItem(int limit, int month);
     void displayWeeklyFrequentlyPurchasedItem(int limit, int week);
