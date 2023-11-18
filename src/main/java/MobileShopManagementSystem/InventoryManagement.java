@@ -6,8 +6,7 @@ public class InventoryManagement implements  Functions{
 
     ArrayList<Mobile> list;
     ArrayList<Iphone> listOfIphone;
-    ArrayList<Infinix> listOfInfinix
-            ;
+    ArrayList<Infinix> listOfInfinix;
     ArrayList<Samsung> listOfSamsung;
 
 
@@ -61,20 +60,20 @@ public class InventoryManagement implements  Functions{
             break;
         }
     }
-
+    @Override
     public void DisplayListOfMobileByCompany(Company company)
     {
         if (company.equals(Company.APPLE))
         {
-            displayModel(company);
+           displayModel();
         }
         if (company.equals(Company.INFINIX))
         {
-            displayModel(company);
+            displayModel();
         }
         if (company.equals(Company.SAMSUNG))
         {
-            displayModel(company);
+            displayModel();
         }
 
 
@@ -82,7 +81,7 @@ public class InventoryManagement implements  Functions{
 
 
     @Override
-    public void display()
+    public void displayModel()
     {
         for(Mobile mobile:list)
         {
@@ -92,46 +91,20 @@ public class InventoryManagement implements  Functions{
             }
         }
     }
+    @Override
+    public void UpdatePrice(String Model,double Price){
+        Model = Model.toUpperCase();
 
-    public void displayModel(Company company)
-    {
-        if(company.equals(Company.APPLE))
+        for (Mobile mobile : list)
         {
-            for (Iphone iphone : listOfIphone)
+            if(mobile != null && mobile.getModel().equals(Model))
             {
-                if(iphone != null)
-                {
-                    System.out.println(iphone.getModel());
-                }
+                mobile.setPrice(Price);
+                System.out.println(mobile);
             }
-        }
-
-        if(company.equals(Company.INFINIX))
-        {
-            for (Infinix infinix : listOfInfinix)
-            {
-                if(infinix != null)
-                {
-                    System.out.println(infinix.getModel());
-                }
-            }
-        }
-
-        if(company.equals(Company.SAMSUNG))
-        {
-            for (Samsung samsung : listOfSamsung)
-            {
-                if (samsung != null)
-                {
-                    System.out.println(samsung.getModel());
-                }
-            }
+            break;
         }
     }
-
-
-//    public void
-
 
 
 }
