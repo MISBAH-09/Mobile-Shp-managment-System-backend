@@ -9,7 +9,9 @@ public class InventoryManagement implements  Functions
     ArrayList<Mobile> lowStock;
     ArrayList<Mobile> outOfStock;
     ArrayList<Mobile> purchasedList;
+    Date date=new Date();
     ArrayList<CustomerAndPurchase> customerAndPurchasesList;
+    File file = new File("Mobiles.txt");
 
 
     public InventoryManagement()
@@ -24,83 +26,194 @@ public class InventoryManagement implements  Functions
     @Override
     public void addPhone(Object object)
     {
-        if (object instanceof Mobile)
+        createFile(file);
+        try
         {
-            Mobile mobile = (Mobile) object;
-            list.add(mobile);
-            System.out.println("Mobile Phone Added Successfully");
+            FileWriter fileWriter = new FileWriter(file,true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            if (object instanceof Mobile)
+            {
+                Mobile mobile = (Mobile) object;
+                list.add(mobile);
+                System.out.println("Mobile Phone Added Successfully");
+                bufferedWriter.write(mobile.toString());
+                bufferedWriter.newLine();
+            }
+            else
+            {
+                System.out.println("Error");
+            }
+            bufferedWriter.close();
+            fileWriter.close();
+            System.out.println("Mobile Data Stored  Successfully In File: "+file.getName());
         }
-        else
+        catch (IOException e)
         {
-            System.out.println("Error");
+            e.printStackTrace();
         }
+
     }
+//    public <T>void display(ArrayList<T> t){
+//        for(int i =0;i< t.size();i++){
+//            System.out.println(t.get(i));
+//        }
+//
+//    }
+
 
     @Override
     public void fetchPhone(String model)
     {
         model = model.toUpperCase();
-
-        for (Mobile mobile : list)
+        try
         {
-            if(mobile != null && mobile.getModel().equals(model))
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            while ((bufferedReader.readLine()) != null)
             {
-                System.out.println(mobile);
+                for (Mobile mobile : list)
+                {
+                    if(mobile != null && mobile.getModel().equals(model))
+                    {
+                        System.out.println(mobile);
+                    }
+                }
+                break;
             }
-            break;
+        }
+        catch (FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
         }
     }
 
 @Override
     public void DisplayListOfMobileByCompany(Company company)
     {
-        for (Mobile mobile : list)
+        try
         {
-            if(mobile != null && mobile.getStock().equals(Stock.AVAILABLE) &&
-                    mobile.getCompany().equals(company))
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            while ((bufferedReader.readLine()) != null)
             {
-                System.out.println(mobile.getModel());
+                for (Mobile mobile : list)
+                {
+                    if(mobile != null && mobile.getStock().equals(Stock.AVAILABLE) &&
+                        mobile.getCompany().equals(company))
+                    {
+                    System.out.println(mobile.getModel());
+                    }
+                }break;
             }
+
+        }
+        catch (FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
         }
     }
+
 @Override
     public void DisplayListOfMobileByPrice(double lowerPrice, double upperPrice)
     {
-        for (Mobile mobile : list)
+        try
         {
-            if(mobile != null && mobile.getPrice() >= lowerPrice && mobile.getPrice() <= upperPrice)
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            while ((bufferedReader.readLine()) != null)
+            {for (Mobile mobile : list)
             {
-                System.out.println(mobile.getModel());
+                if(mobile != null && mobile.getPrice() >= lowerPrice && mobile.getPrice() <= upperPrice)
+                {
+                    System.out.println(mobile.getModel());
+                }
+
+                }break;
             }
+
         }
+        catch (FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+
     }
 @Override
     public void DisplayListOfMobileByCompanyAndPrice(Company company, double lowerPrice, double upperPrice)
     {
-        for (Mobile mobile : list)
+        try
         {
-            if(mobile != null && mobile.getStock().equals(Stock.AVAILABLE) &&
-                    mobile.getCompany().equals(company))
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            while ((bufferedReader.readLine()) != null)
             {
-                if(mobile.getPrice() >= lowerPrice && mobile.getPrice() <= upperPrice)
+
+                for (Mobile mobile : list)
                 {
-                    System.out.println(mobile.getModel());
-                }
+                    if(mobile != null && mobile.getStock().equals(Stock.AVAILABLE) &&
+                            mobile.getCompany().equals(company))
+                    {
+                        if(mobile.getPrice() >= lowerPrice && mobile.getPrice() <= upperPrice)
+                        {
+                            System.out.println(mobile.getModel());
+                        }
+                    }
+                }break;
             }
+
+        }
+        catch (FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
         }
     }
 
     @Override
     public void displayListOfMobile()
     {
-        for(Mobile mobile : list)
+        try
         {
-            if (mobile != null)
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            while ((bufferedReader.readLine()) != null)
             {
-                System.out.println(mobile.getModel());
+
+                for(Mobile mobile : list)
+                {
+                    if (mobile != null)
+                    {
+                        System.out.println(mobile.getModel());
+                    }
+                }break;
             }
+
+        }
+        catch (FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
         }
     }
+
 
     @Override
     public void UpdatePrice(String model, double Price)
@@ -166,17 +279,17 @@ public class InventoryManagement implements  Functions
         }
     }
 
-    public void purchaseAndCustomer(String name, Mobile mobile, String phone,String date)
+    public void purchaseAndCustomer(CustomerAndPurchase customer)
     {
-        purchasedMobile(mobile.getModel());
-        customerAndPurchasesList.add(new CustomerAndPurchase(name,mobile, phone,date));
+        purchasedMobile(customer.getModel());
+        customerAndPurchasesList.add(customer);
         System.out.println
                 (
-                    "Customer Name: " + name +
-                    "       Phone Number: " + phone +
-                    "       Purchased Mobile Model: " + mobile.getModel() +
-                    "       Price: " + mobile.getPrice() +
-                    "       Date: " + date
+                    "Customer Name: " + customer.getCustomerName() +
+                    "       Phone Number: " + customer.getMobileNo() +
+                    "       Purchased Mobile Model: " + customer.getModel() +
+                    "       Price: " + customer.getPrice() +
+                    "       Date: " + customer.getDate()
                 );
     }
 
@@ -207,54 +320,118 @@ public class InventoryManagement implements  Functions
     @Override
     public void displayOutofStockMobile()
     {
-        for (Mobile mobile : list)
+        try{
+        FileReader fileReader = new FileReader(file);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        while ((bufferedReader.readLine()) != null)
         {
-            if(OutOfStock(mobile))
+            for (Mobile mobile : list)
             {
-                System.out.println(mobile.getModel());
-            }
+                if(OutOfStock(mobile))
+                {
+                    System.out.println(mobile.getModel());
+                }
+            }break;
+        }
+
+    }
+        catch (FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
         }
     }
 
     @Override
     public void displayLowStockMobile()
     {
-        for (Mobile mobile : list)
-        {
-            if(LowStock(mobile))
+        try{
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            while ((bufferedReader.readLine()) != null)
             {
-                System.out.println(mobile.getModel());
+                for (Mobile mobile : list)
+                {
+                    if(LowStock(mobile))
+                    {
+                        System.out.println(mobile.getModel());
+                    }
+                }break;
             }
+
+        }
+        catch (FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
         }
     }
 
     @Override
     public void displayMonthlyFrequentlyPurchasedItem(int limit, int month)
     {
-        for (Mobile mobile : list)
+        try {
+        FileReader fileReader = new FileReader(file);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        while ((bufferedReader.readLine()) != null)
         {
-            if (mobile != null && mobile.getMonthlySales(month) > limit)
+            for (Mobile mobile : list)
             {
-                System.out.println(mobile.getModel());
-                System.out.println("\n");
-            }
+                if (mobile != null && mobile.getMonthlySales(month) > limit)
+                {
+                    System.out.println(mobile.getModel());
+                    System.out.println("\n");
+                }
+            }break;
+        }
+
+    }
+        catch (FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
         }
     }
 
 @Override
     public void displayWeeklyFrequentlyPurchasedItem(int limit, int week)
     {
-        for (Mobile mobile : list)
+        try {
+        FileReader fileReader = new FileReader(file);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        while ((bufferedReader.readLine()) != null)
         {
-            if (mobile != null && mobile.getWeeklySales(week) > limit)
+            for (Mobile mobile : list)
             {
-                System.out.println(mobile.getModel());
-                System.out.println("\n");
-            }
+                if (mobile != null && mobile.getWeeklySales(week) > limit)
+                {
+                    System.out.println(mobile.getModel());
+                    System.out.println("\n");
+                }
+            }break;
+        }
+
+    }
+        catch (FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
+        catch(IOException e)
+        {
+            throw new RuntimeException(e);
         }
     }
 
-    public  void creatFile(File file)
+    public  void createFile(File file)
     {
         if(!file.exists())
         {
@@ -271,7 +448,7 @@ public class InventoryManagement implements  Functions
     }
     public void storeDataToFile(File file)
     {
-        creatFile(file);
+        createFile(file);
         try
         {
             FileWriter fileWriter = new FileWriter(file,true);
@@ -291,33 +468,66 @@ public class InventoryManagement implements  Functions
         }
     }
 
-    public void readFromFile(File file)
-    {
-        String line;
-        try
-        {
-            FileReader fileReader = new FileReader(file);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            while ((line = bufferedReader.readLine()) != null)
-            {
-                int i = 0;
-                System.out.println(line);
-                i++;
-            }
+//    public void readFromFile(File file)
+//    {
+//        String line;
+//        try
+//        {
+//            FileReader fileReader = new FileReader(file);
+//            BufferedReader bufferedReader = new BufferedReader(fileReader);
+//            while ((bufferedReader.readLine()) != null)
+//            {
+//                int i = 0;
+//                System.out.println(line);
+//                i++;
+//            }
+//
+//        }
+//        catch (FileNotFoundException e)
+//        {
+//            throw new RuntimeException(e);
+//        }
+//        catch (IOException e)
+//        {
+//            throw new RuntimeException(e);
+//        }
+//    }
+//
 
-        }
-        catch (FileNotFoundException e)
+    public void dailySales()
+    {
+        double[] sales=new double[30];
+        int revenuestartdate=customerAndPurchasesList.get(0).getDate().getDate();
+        for(int i =0;i<customerAndPurchasesList.size()-1;)
         {
-            throw new RuntimeException(e);
+            if(customerAndPurchasesList != null )
+            {
+                sales[revenuestartdate]+=customerAndPurchasesList.get(i).getPrice();
+                i++;
+                CustomerAndPurchase obj1=customerAndPurchasesList.get(i-1);
+                    CustomerAndPurchase obj2=customerAndPurchasesList.get(i);
+                    boolean l=date.iisRecent(obj1.getDate(),obj2.getDate());
+                    if(l==true){
+                        sales[revenuestartdate]+= customerAndPurchasesList.get(i).getPrice();
+                        System.out.println(revenuestartdate +"   " + sales[revenuestartdate]);
+                    }else if(l==false){
+                        revenuestartdate=customerAndPurchasesList.get(i).getDate().getDate();
+
+                        sales[revenuestartdate]+=customerAndPurchasesList.get(i).getPrice();
+                        System.out.println(revenuestartdate +"   " + sales[revenuestartdate]);
+
+                    }
+                }
+            }
+//        for(int m=0;m<30;m++){
+//            System.out.println(sales[m]);
+//        }
         }
-        catch (IOException e)
-        {
-            throw new RuntimeException(e);
-        }
+
+
     }
 
 
 
-}
 
 

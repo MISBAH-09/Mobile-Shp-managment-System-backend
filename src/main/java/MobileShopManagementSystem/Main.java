@@ -28,8 +28,23 @@ public class Main
         inventoryManagement.addPhone(iphone);
         inventoryManagement.addPhone(samsung);
         inventoryManagement.addPhone(infinix);
+        inventoryManagement.DisplayListOfMobileByCompany(Company.INFINIX);
+
+        CustomerAndPurchase Purchaser1 = new CustomerAndPurchase("Hamza",infinix,"235677",new Date(4,5,2020));
+        inventoryManagement.purchaseAndCustomer(Purchaser1);
+        CustomerAndPurchase Purchaser2 = new CustomerAndPurchase("szxdfg",infinix,"235677",new Date(4,5,2020));
+        inventoryManagement.purchaseAndCustomer(Purchaser2);
+        CustomerAndPurchase Purchaser3 = new CustomerAndPurchase("szxdfg",infinix,"235677",new Date(5,5,2020));
+        inventoryManagement.purchaseAndCustomer(Purchaser3);
+        CustomerAndPurchase Purchaser4 = new CustomerAndPurchase("szxdfg",infinix,"235677",new Date(8,5,2020));
+        inventoryManagement.purchaseAndCustomer(Purchaser4);
+
+
+        inventoryManagement.dailySales();
+//        inventoryManagement.dailySales();
+        //      inventoryManagement.display(inventoryManagement.customerAndPurchasesList);
 //        inventoryManagement.displayModel();
-//        inventoryManagement.fetchPhone("IPhone 11");
+ //       inventoryManagement.fetchPhone("Infinix Hot 10");
 //        inventoryManagement.UpdatePrice("IPhone 11",400000.3);
 //        inventoryManagement.purchasedMobile("Iphone");
 //        inventoryManagement.purchasedMobile("Iphone 11");
@@ -37,10 +52,10 @@ public class Main
 //        System.out.println(iphone.getStock());
 
 //      inventoryManagement.purchaseAndCustomer("Hamza",iphone,"03238835146","02-Nov-2023");
-        File file = new File("Mobiles.txt");
-        inventoryManagement.storeDataToFile(file);
-        inventoryManagement.readFromFile(file);
-//
+
+//        inventoryManagement.storeDataToFile(file);
+//        inventoryManagement.readFromFile(file);
+////
 
 
     }

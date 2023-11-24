@@ -7,9 +7,9 @@ public class CustomerAndPurchase
     private Mobile mobile;
     private double price;
     private String model;
-    private String date;
+    private Date date;
 
-    public CustomerAndPurchase(String customerName, Mobile mobile, String mobileNo, String date)
+    public CustomerAndPurchase(String customerName, Mobile mobile, String mobileNo, Date date)
     {
         setCustomerName(customerName);
         setModel(mobile.getModel());
@@ -60,14 +60,20 @@ public class CustomerAndPurchase
         this.mobileNo = mobileNo;
     }
 
-    public String getDate()
-    {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date)
-    {
+    public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Mobile getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(Mobile mobile) {
+        this.mobile = mobile;
     }
 
     public void displayDetails()
