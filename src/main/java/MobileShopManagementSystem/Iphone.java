@@ -1,16 +1,13 @@
 package MobileShopManagementSystem;
 public class Iphone extends Apple {
     private String networkType;
-    private String specialAttributes;
 
     public Iphone(String Model, int RAM_GB, Dimensions dimension, int stockQuantity,
                    Condition condition, double price, String battery_capacity,
-                  String OS, String camera, String colour, String IOS_Version, String networkType,
-                  String specialAttributes) {
+                  String OS, String camera, String colour,int SIM_capacity ,String specialAttributes,String IOS_Version, String networkType) {
         super(Company.APPLE, Model, RAM_GB, dimension, stockQuantity, condition, price,
-                battery_capacity, OS, camera, colour,Stock.AVAILABLE, IOS_Version);
+                battery_capacity, OS, camera, colour,Stock.AVAILABLE,SIM_capacity, specialAttributes,IOS_Version);
         setNetworkType(networkType);
-        setSpecialAttributes(specialAttributes);
     }
 
     public String getNetworkType() {
@@ -21,13 +18,6 @@ public class Iphone extends Apple {
         this.networkType = networkType;
     }
 
-    public String getSpecialAttributes() {
-        return specialAttributes;
-    }
-
-    public void setSpecialAttributes(String specialAttributes) {
-        this.specialAttributes = specialAttributes;
-    }
 
     @Override
     public String toString()

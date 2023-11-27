@@ -9,9 +9,14 @@ public class Date {
     }
 
     Date(int date, int month, int year) {
-        this.date = date;
-        this.month = month;
-        this.year = year;
+        if(month<=12 && date<=31){
+            setDate(date);
+            setMonth(month);
+            setYear(year);
+        }
+        else {
+            System.out.println("Invalid date...");
+        }
     }
 
     public void setDate(int date) {
@@ -23,7 +28,7 @@ public class Date {
     }
 
     public void setMonth(int month) {
-        this.month = month;
+            this.month = month;
     }
 
     public int getMonth() {

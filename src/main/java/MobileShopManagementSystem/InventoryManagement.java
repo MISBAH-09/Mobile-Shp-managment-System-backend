@@ -3,7 +3,7 @@ package MobileShopManagementSystem;
 import java.io.*;
 import java.util.ArrayList;
 
-public class InventoryManagement implements  Functions
+public class InventoryManagement implements Functions
 {
     ArrayList<Mobile> list;
     ArrayList<Mobile> lowStock;
@@ -14,8 +14,7 @@ public class InventoryManagement implements  Functions
     File file = new File("Mobiles.txt");
 
 
-    public InventoryManagement()
-    {
+    public InventoryManagement() throws IOException {
         this.list = new ArrayList<>();
         this.lowStock = new ArrayList<>();
         this.outOfStock = new ArrayList<>();
@@ -24,12 +23,12 @@ public class InventoryManagement implements  Functions
     }
 
     @Override
-    public void addPhone(Object object)
-    {
+    public void addPhone(Object object) {
         createFile(file);
-        try
-        {
-            FileWriter fileWriter = new FileWriter(file,true);
+
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = new FileWriter(file,true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             if (object instanceof Mobile)
             {
@@ -46,21 +45,11 @@ public class InventoryManagement implements  Functions
             bufferedWriter.close();
             fileWriter.close();
             System.out.println("Mobile Data Stored  Successfully In File: "+file.getName());
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
 
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
-//    public <T>void display(ArrayList<T> t){
-//        for(int i =0;i< t.size();i++){
-//            System.out.println(t.get(i));
-//        }
-//
-//    }
-
-
     @Override
     public void fetchPhone(String model)
     {
@@ -219,15 +208,38 @@ public class InventoryManagement implements  Functions
     public void UpdatePrice(String model, double Price)
     {
         model = model.toUpperCase();
-
-        for (Mobile mobile : list) {
-            if (mobile != null && mobile.getModel().equals(model))
+        try
+        {
+            FileReader fileReader = new FileReader(file);
+            FileWriter fileWriter=new FileWriter("Mobiles.txt");
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            BufferedWriter writer=new BufferedWriter(fileWriter);
+            String  line;
+            while((line = bufferedReader.readLine()) != null)
             {
-
-                mobile.setPrice(Price);
+            //    System.out.println("rdtfgh");
+//                Mobile mobile = parseMobile(line);
+                for (Mobile mobile : list) {
+                    if (mobile != null && mobile.getModel().equals(model))
+                    {
+                        mobile.setPrice(Price);
+                        writer.write(mobile.toString());
+                    }
+                    else {
+                        writer.write(line);
+                    }
+                }
             }
-            break;
         }
+        catch (FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+
     }
 @Override
     public void UpdateStock(String model, int stockQunatity)
@@ -468,32 +480,6 @@ public class InventoryManagement implements  Functions
         }
     }
 
-//    public void readFromFile(File file)
-//    {
-//        String line;
-//        try
-//        {
-//            FileReader fileReader = new FileReader(file);
-//            BufferedReader bufferedReader = new BufferedReader(fileReader);
-//            while ((bufferedReader.readLine()) != null)
-//            {
-//                int i = 0;
-//                System.out.println(line);
-//                i++;
-//            }
-//
-//        }
-//        catch (FileNotFoundException e)
-//        {
-//            throw new RuntimeException(e);
-//        }
-//        catch (IOException e)
-//        {
-//            throw new RuntimeException(e);
-//        }
-//    }
-//
-
     public void dailySales()
     {
         double[] sales=new double[30];
@@ -519,12 +505,7 @@ public class InventoryManagement implements  Functions
                     }
                 }
             }
-//        for(int m=0;m<30;m++){
-//            System.out.println(sales[m]);
-//        }
         }
-
-
     }
 
 
